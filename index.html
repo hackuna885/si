@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Material</title>
+</head>
+<body onload="downloadFiles()">
+    <div class="row">
+        <div class="container">
+            <div class="col-md-5 mx-auto mt-5">
+                <h1 style="text-align: center;">Material de trabajo</h1>
+                <p class="text-body-secondary" style="text-align: center;">Hay 6 archivos disponibles. Si los archivos no se descargan automáticamente, simplemente haz clic en los botones correspondientes para descargarlos.</p>
+                <div class="row m-5">
+                    <div class="col-md-12 mx-auto">
+                        <form>
+                            <div class="mb-3">
+                                <label class="form-label">Haz clic en el botón</label>
+                                <button type="button" class="form-control btn btn-secondary btn-lg text-center" id="arch1" />
+                                    Descargar Archivo 1 Imagen
+                                </button>
+                                <div class="form-text">para descargar el primer archivo.</div>
+                            </div>
+                            <div class="mb-3">
+
+                                <label class="form-label">Haz clic en el botón</label>
+                                <button type="button" class="form-control btn btn-secondary btn-lg text-center" id="arch2" />
+                                Descargar Archivo 2 Presentación
+                                </button>
+                                <div class="form-text">para descargar el segundo archivo.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Haz clic en el botón</label>
+                                <<button type="button" class="form-control btn btn-secondary btn-lg text-center" id="arch3" />
+                                Descargar Archivo 3 Audio 1
+                                </button>
+                                <div class="form-text">para descargar el tercer archivo.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Haz clic en el botón</label>
+                                <<button type="button" class="form-control btn btn-secondary btn-lg text-center" id="arch4" />
+                                Descargar Archivo 4 Audio 2
+                                </button>
+                                <div class="form-text">para descargar el cuarto archivo.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Haz clic en el botón</label>
+                                <<button type="button" class="form-control btn btn-secondary btn-lg text-center" id="arch5" />
+                                Descargar Archivo 5 Video 1
+                                </button>
+                                <div class="form-text">para descargar el quinto archivo.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Haz clic en el botón</label>
+                                <<button type="button" class="form-control btn btn-secondary btn-lg text-center" id="arch6" />
+                                Descargar Archivo 6 Video 2
+                                </button>
+                                <div class="form-text">para descargar el sexto archivo.</div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        fetch('https://jsonplaceholder.typicode.com/posts/1')
+            .then(response => {
+                if (response.ok) {
+                console.log('Conexión a internet disponible');
+                // window.location('https://info2024.net');
+                } else {
+                console.log('Sin conexión a internet');
+                // window.location('http://192.168.1.8');
+                }
+            })
+            .catch(error => {
+                console.log('Sin conexión a internet');
+                // window.location('http://192.168.1.8');
+            });
+    </script>
+
+
+    <script>
+        // Configurar la lista de archivos a descargar
+        const filesToDownload = [
+        { url: 'downloads/ponteReady.jpg', filename: 'ponteReady.jpg' },
+        { url: 'downloads/Capacitacion_RG_y_RC_2024.pptx', filename: 'Capacitacion_RG_y_RC_2024.pptx' },
+        { url: 'downloads/Audio1.mp3', filename: 'Audio1.mp3' },
+        { url: 'downloads/Audio2.mp3', filename: 'Audio2.mp3' },
+        { url: 'downloads/video1.mp4', filename: 'video1.mp4' },
+        { url: 'downloads/video2.mp4', filename: 'video2.mp4' },
+        ];
+
+        let currentIndex = 0;
+
+        function downloadFiles() {
+        if (currentIndex < filesToDownload.length) {
+            const file = filesToDownload[currentIndex];
+            downloadFile(file.url, file.filename);
+            currentIndex++;
+            setTimeout(downloadFiles, 1000); // Esperar 1 segundo antes de descargar el siguiente archivo
+        }
+        }
+
+        function downloadFile(fileUrl, fileName) {
+        // Crea un enlace temporal para iniciar la descarga
+        const link = document.createElement('a');
+        link.href = fileUrl;
+        link.download = fileName;
+
+        // Agrega el enlace al documento y haz clic en él
+        document.body.appendChild(link);
+        link.click();
+
+        // Elimina el enlace temporal del documento
+        document.body.removeChild(link);
+        }
+    </script>
+
+<script>
+    document.getElementById('arch1').addEventListener('click', function() {
+      // Ruta al archivo que se va a descargar
+      var fileUrl = 'downloads/ponteReady.jpg';
+
+      // Crea un elemento <a> de forma dinámica
+      var downloadLink = document.createElement('a');
+      downloadLink.setAttribute('href', fileUrl);
+      downloadLink.setAttribute('download', 'ponteReady.jpg');
+
+      // Agrega el elemento <a> al DOM y hace clic en él
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+
+      // Elimina el elemento <a> del DOM
+      document.body.removeChild(downloadLink);
+    });
+
+    document.getElementById('arch2').addEventListener('click', function() {
+      // Ruta al archivo que se va a descargar
+      var fileUrl = 'downloads/Capacitacion_RG_y_RC_2024.pptx';
+
+      // Crea un elemento <a> de forma dinámica
+      var downloadLink = document.createElement('a');
+      downloadLink.setAttribute('href', fileUrl);
+      downloadLink.setAttribute('download', 'Capacitacion_RG_y_RC_2024.pptx');
+
+      // Agrega el elemento <a> al DOM y hace clic en él
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+
+      // Elimina el elemento <a> del DOM
+      document.body.removeChild(downloadLink);
+    });
+
+    document.getElementById('arch3').addEventListener('click', function() {
+      // Ruta al archivo que se va a descargar
+      var fileUrl = 'downloads/Audio1.mp3';
+
+      // Crea un elemento <a> de forma dinámica
+      var downloadLink = document.createElement('a');
+      downloadLink.setAttribute('href', fileUrl);
+      downloadLink.setAttribute('download', 'Audio1.mp3');
+
+      // Agrega el elemento <a> al DOM y hace clic en él
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+
+      // Elimina el elemento <a> del DOM
+      document.body.removeChild(downloadLink);
+    });
+
+    document.getElementById('arch4').addEventListener('click', function() {
+      // Ruta al archivo que se va a descargar
+      var fileUrl = 'downloads/Audio2.mp3';
+
+      // Crea un elemento <a> de forma dinámica
+      var downloadLink = document.createElement('a');
+      downloadLink.setAttribute('href', fileUrl);
+      downloadLink.setAttribute('download', 'Audio2.mp3');
+
+      // Agrega el elemento <a> al DOM y hace clic en él
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+
+      // Elimina el elemento <a> del DOM
+      document.body.removeChild(downloadLink);
+    });
+
+    document.getElementById('arch5').addEventListener('click', function() {
+      // Ruta al archivo que se va a descargar
+      var fileUrl = 'downloads/video1.mp4';
+
+      // Crea un elemento <a> de forma dinámica
+      var downloadLink = document.createElement('a');
+      downloadLink.setAttribute('href', fileUrl);
+      downloadLink.setAttribute('download', 'video1.mp4');
+
+      // Agrega el elemento <a> al DOM y hace clic en él
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+
+      // Elimina el elemento <a> del DOM
+      document.body.removeChild(downloadLink);
+    });
+
+    document.getElementById('arch6').addEventListener('click', function() {
+      // Ruta al archivo que se va a descargar
+      var fileUrl = 'downloads/video2.mp4';
+
+      // Crea un elemento <a> de forma dinámica
+      var downloadLink = document.createElement('a');
+      downloadLink.setAttribute('href', fileUrl);
+      downloadLink.setAttribute('download', 'video2.mp4');
+
+      // Agrega el elemento <a> al DOM y hace clic en él
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+
+      // Elimina el elemento <a> del DOM
+      document.body.removeChild(downloadLink);
+    });
+  </script>
+
+
+</body>
+</html>
